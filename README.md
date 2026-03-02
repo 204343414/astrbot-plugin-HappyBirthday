@@ -1,14 +1,52 @@
-# astrbot-plugin-helloworld
+# 🎂 astrbot-plugin-HappyBirthday
 
-AstrBot 插件模板 / A template plugin for AstrBot plugin feature
+AstrBot 插件 —— QQ 好友生日自动祝福
 
-> [!NOTE]
-> This repo is just a template of [AstrBot](https://github.com/AstrBotDevs/AstrBot) Plugin.
-> 
-> [AstrBot](https://github.com/AstrBotDevs/AstrBot) is an agentic assistant for both personal and group conversations. It can be deployed across dozens of mainstream instant messaging platforms, including QQ, Telegram, Feishu, DingTalk, Slack, LINE, Discord, Matrix, etc. In addition, it provides a reliable and extensible conversational AI infrastructure for individuals, developers, and teams. Whether you need a personal AI companion, an intelligent customer support agent, an automation assistant, or an enterprise knowledge base, AstrBot enables you to quickly build AI applications directly within your existing messaging workflows.
+每天自动检查所有 QQ 好友的生日信息，如果有好友今天过生日，就在指定时间（默认早上 8:00）让 Bot 主动发送私聊祝福消息，并自动适配 AstrBot 预先配置的人格提示词，让祝福更有个性！
 
-# Supports
+## ✨ 功能特性
 
-- [AstrBot Repo](https://github.com/AstrBotDevs/AstrBot)
-- [AstrBot Plugin Development Docs (Chinese)](https://docs.astrbot.app/dev/star/plugin-new.html)
-- [AstrBot Plugin Development Docs (English)](https://docs.astrbot.app/en/dev/star/plugin-new.html)
+- 🔍 **每日自动检查** — 每天定时遍历好友列表，获取并缓存生日信息
+- 🎉 **定时发送祝福** — 在指定时间向今天过生日的好友发送私聊祝福
+- 🤖 **AI 个性化祝福** — 使用 AstrBot 配置的 LLM + 人格提示词生成祝福
+- 📝 **手动添加生日** — API 获取不到时可手动录入好友生日
+- 🚫 **黑名单管理** — 支持设置不发送祝福的用户
+- 📢 **群组通知** — 可配置通知群组，接收检查和祝福的状态汇报
+- 💾 **数据持久化** — 生日缓存和祝福记录保存到本地，重启不丢失
+
+## 📋 管理员命令
+
+| 命令 | 说明 |
+|------|------|
+| `/生日检查` | 手动触发检查所有好友生日 |
+| `/立即祝福` | 手动触发发送今日生日祝福 |
+| `/生日状态` | 查看插件运行状态 |
+| `/查看寿星` | 查看今天过生日的好友 |
+| `/查看生日缓存` | 查看已缓存的所有好友生日 |
+| `/手动添加生日 <QQ号> <月> <日>` | 手动录入好友生日 |
+| `/删除生日 <QQ号>` | 删除生日记录 |
+| `/添加生日黑名单 <QQ号>` | 添加到黑名单 |
+| `/移除生日黑名单 <QQ号>` | 从黑名单移除 |
+| `/查看生日黑名单` | 查看黑名单列表 |
+
+## ⚙️ 配置项
+
+| 配置项 | 类型 | 默认值 | 说明 |
+|--------|------|--------|------|
+| birthday_check_enabled | bool | true | 启用生日祝福功能 |
+| check_hour | int | 7 | 生日检查时间（小时） |
+| check_minute | int | 30 | 生日检查时间（分钟） |
+| send_hour | int | 8 | 祝福发送时间（小时） |
+| send_minute | int | 0 | 祝福发送时间（分钟） |
+| use_llm_greeting | bool | true | 使用 AI + 人格生成祝福 |
+| greeting_interval | int | 5 | 每条祝福间隔秒数 |
+| blacklist_users | list | [] | 黑名单 QQ 号列表 |
+| notify_groups | list | [] | 通知群组列表 |
+
+## ⚠️ 重要提示
+
+**关于生日获取：** QQ 好友的生日信息能否自动获取，取决于你使用的 OneBot 实现端（NapCat、LLOneBot、Lagrange 等）。不同实现返回的字段可能不同，插件已做多种格式兼容。如果自动获取不到，请使用 `/手动添加生日` 命令手动录入。
+
+## 📦 安装
+
+在 AstrBot WebUI 的插件管理中，输入仓库地址安装：
