@@ -1,0 +1,44 @@
+{
+    "birthday_check_enabled": {
+        "description": "启用生日祝福功能",
+        "type": "bool",
+        "hint": "是否启用每日自动检查好友生日并发送祝福",
+        "default": true
+    },
+    "send_hour": {
+        "description": "检查并发送祝福的时间（小时）",
+        "type": "int",
+        "hint": "每天几点执行生日检查并发送祝福（0-23），默认早上8点",
+        "default": 8
+    },
+    "send_minute": {
+        "description": "检查并发送祝福的时间（分钟）",
+        "type": "int",
+        "hint": "每天执行生日检查并发送祝福的分钟数（0-59）",
+        "default": 0
+    },
+    "use_llm_greeting": {
+        "description": "使用AI生成祝福",
+        "type": "bool",
+        "hint": "开启后将使用LLM结合AstrBot人格提示词生成个性化祝福，关闭则使用预设祝福语",
+        "default": true
+    },
+    "greeting_interval": {
+        "description": "祝福发送间隔（秒）",
+        "type": "int",
+        "hint": "每条祝福消息之间的间隔秒数，避免被风控，寿星多建议设8-15秒",
+        "default": 5
+    },
+    "blacklist_users": {
+        "description": "黑名单用户",
+        "type": "list",
+        "hint": "不发送生日祝福的用户QQ号列表，其他bot的QQ号也填这里",
+        "default": []
+    },
+    "notify_groups": {
+        "description": "通知群组列表",
+        "type": "list",
+        "hint": "生日检查和祝福发送的状态通知会发到这些群",
+        "default": []
+    }
+}
